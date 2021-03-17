@@ -1,0 +1,21 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: postgresql
+  namespace: default
+  labels:
+    app: postgresql
+    app.kubernetes.io/component: postgresql
+    app.kubernetes.io/instance: postgresql
+    template: postgresql-ephemeral-template
+spec:
+  ports:
+    - name: postgresql
+      protocol: TCP
+      port: 5432
+      targetPort: 5432
+      nodePort: 31024
+  selector:
+    name: postgresql
+  type: NodePort
+  sessionAffinity: None
